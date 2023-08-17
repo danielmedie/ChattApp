@@ -20,7 +20,6 @@ function App() {
   return (
     <div className="App">
       <h1>Chatt App</h1>
-   
     </div>
   );
 }
