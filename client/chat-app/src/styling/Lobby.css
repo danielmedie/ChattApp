@@ -1,0 +1,89 @@
+.chatContainer {
+  width: 800px;
+  height: 750px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid white;
+  border-radius: 15px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.lobby {
+  width: 100%;
+  height: 100vh;
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/background.png.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.headerLobby {
+  text-align: center;
+  font-family: "Poppins";
+  text-transform: uppercase;
+  font-size: 3em;
+  color: rgb(85, 82, 82);
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.inputBox {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex: 1;
+}
+
+.input {
+  width: 300px;
+  height: 50px;
+  /* border-radius: 15px; */
+  /* box-shadow: 2px 2px 2px black; */
+}
+
+.inputButton {
+  width: 70px;
+  height: 50px;
+  background-color: rgba(0, 0, 255, 0.455);
+  color: white;
+  border-radius: 0 0 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.inputButton:hover {
+  background-color: #a5b4c6;
+}
+
+.inputButton:active {
+  transform: translateY(2px);
+}
+
+.sideBar {
+  flex: 1 20%;
+  height: 674px;
+  background-color: #f2f2f2;
+  border-radius: 0 0 0 13px;
+  margin-right: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+.createRoomHeader {
+  display: flex;
+  margin: 20px;
+  justify-content: space-around;
+}
+
+.lobbyButton {
+  padding: 8px;
+}
