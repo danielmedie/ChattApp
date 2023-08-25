@@ -1,12 +1,13 @@
-.chatContainer {
+/* .chatContainer {
   width: 800px;
   height: 750px;
   background-color: rgb(255, 255, 255);
   border: 2px solid white;
   border-radius: 15px;
-  /* display: flex;
-  flex-direction: column; */
-}
+
+} 
+
+/*
 
 .lobby {
   width: 100%;
@@ -44,8 +45,7 @@
 .input {
   width: 300px;
   height: 50px;
-  /* border-radius: 15px; */
-  /* box-shadow: 2px 2px 2px black; */
+
 }
 
 .inputButton {
@@ -86,4 +86,130 @@ li {
 
 .lobbyButton {
   padding: 8px;
+}
+
+.chatMessageContainer {
+  border: 2px solid black;
+}
+
+
+ */
+
+.lobby {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: beige;
+  background-image: url("../assets/background.png.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Stilar för hela rutan (chattrutan, sidebar och input) */
+.chat-container {
+  display: flex;
+  width: 60%; /* Justera bredden efter ditt behov */
+  height: 80vh; /* Justera höjden efter ditt behov */
+  background-color: rgb(255, 255, 255);
+  border: 2px solid white;
+  border-radius: 15px;
+}
+
+/* Stilar för sidebaren */
+.sidebar {
+  flex: 1;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 13px 0 0 13px;
+}
+
+.createRoomHeader {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.lobbyButton {
+  padding: 8px;
+}
+
+/* Stilar för chattrutan och meddelanden */
+.chat {
+  flex: 2; /* Justera andel av bredden efter ditt behov */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Stilar för inputboxen */
+.inputBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 2px solid white;
+}
+
+.input {
+  flex: 1;
+  height: 50px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.inputButton {
+  width: 70px;
+  height: 50px;
+  background-color: rgba(0, 0, 255, 0.455);
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.inputButton:hover {
+  background-color: #a5b4c6;
+}
+
+.inputButton:active {
+  transform: translateY(2px);
+}
+
+.headerLobby {
+  text-align: center;
+  font-family: "Poppins";
+  text-transform: uppercase;
+  font-size: 3em;
+  color: rgb(85, 82, 82);
+}
+
+.my-message {
+  align-self: flex-end;
+  background-color: #a5b4c6; /* Bakgrundsfärg för dina meddelanden */
+  color: white;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 15px;
+}
+
+.other-message {
+  align-self: flex-start;
+  background-color: #f2f2f2; /* Bakgrundsfärg för andra användarens meddelanden */
+  color: black;
+}
+
+li {
+  list-style: none;
 }
