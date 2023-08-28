@@ -3,6 +3,8 @@ import "../styling/HomePage.css";
 import { io } from "socket.io-client";
 import HomePage from "./HomePage";
 import Lobby from "./Lobby";
+import SocketApp from "./socketProvider";
+import { Rooms } from "./rooms";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -37,6 +39,8 @@ function App() {
           initializeChat={initializeChat}
         />
       )}
+      < Rooms />
+
     </div>
   );
 }
