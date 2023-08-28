@@ -3,35 +3,40 @@ import "../styling/HomePage.css";
 import { io } from "socket.io-client";
 import HomePage from "./HomePage";
 import Lobby from "./Lobby";
-import SocketApp from "./socketProvider";
-import { Rooms } from "./rooms";
+// import SocketApp from "./socketProvider";
+import Rooms from "./rooms";
+import { useSockets } from "../context/socketContext";
 
 function App() {
   const [username, setUsername] = useState("");
   const [messages, setMessages] = useState<string[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const socket = io("http://localhost:3000", { autoConnect: false });
+  const sockets = io("http://localhost:3000", { autoConnect: false });
+
+
+
+  const { socket } = useSockets();
 
   const initializeChat = () => {
-    socket.connect();
-    socket.emit("user_connected", username);
+    sockets.connect();
+    sockets.emit("user_connected", username);
     setIsLoggedIn(true);
   };
 
   useEffect(() => {
-    socket.on("user_connected_message", (username) => {
+    sockets.on("user_connected_message", (username) => {
       setMessages((prevMessages) => [
         ...prevMessages,
         `${username} has joined`,
       ]);
     });
-  }, [socket]);
+  }, [sockets]);
 
   return (
     <div className="homePage">
       {isLoggedIn ? (
-        <Lobby messages={messages} username={username} socket={socket} />
+        <Lobby messages={messages} username={username} socket={sockets} />
       ) : (
         <HomePage
           setUserName={setUsername}

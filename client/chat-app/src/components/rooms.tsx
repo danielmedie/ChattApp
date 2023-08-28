@@ -5,44 +5,57 @@
 
 import { useRef } from "react";
 import { useSockets } from "../context/socketContext";
+import EVENTS from "../validator/events";
 
 
 function Rooms() {
 
     const { socket, roomId, rooms } = useSockets();
-    const createRoom = useRef(null);
+    const createRoomRef = useRef(null);
 
 
     //hantera skapandet av rum
 
     function handleCreateRoom() {
 
-        //hämta namnet på rum
+        // Ett försök att hantera error eftersom useRef är satt till null 
 
-        //emitta skapat rum
+        // let _roomname = "";
+        // if (createRoom.current === null) {
+        //     _roomname = "";
+        // } else {
+        //     _roomname = createRoom.current.value;
+        // }
+
+        // const roomName = _roomname;
+
+
+        //hämta namnet på rum (error pga värdet är null)
+        const roomName = createRoomRef.current.value || "";
+
+        if (!String(roomName).trim()) return;
+
+        //emitta skapat rum (event)
+        socket.emit(EVENTS.CLIENT.CREATE_ROOM, { roomName });
 
         //inputtaggen som tom string
+        createRoomRef.current.value = "";
 
     }
 
 
 
     const roomSetup = () => {
-        <section className="room-container">
-            <input ref={createRoom} placeholder=" Call your room something... " />
-            <button onClick={handleCreateRoom}>Create your room!</button>
-        </section>
+
         //map. meddelande-komponent
 
-
-        // <section>
-        //     <p>
-        //     </p>
-        // </section>
     }
     return (
         <div>
-            <Rooms />
+            <section className="room-container">
+                <input ref={createRoomRef} placeholder=" Call your room something... " />
+                <button onClick={handleCreateRoom}>Create your room!</button>
+            </section>
         </div>
     )
 }

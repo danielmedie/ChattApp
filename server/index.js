@@ -1,3 +1,5 @@
+/** @format */
+
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -13,6 +15,13 @@ const io = new Server(server, {
 });
 
 app.use(cors());
+
+const EVENTS = {
+  connection: "connection",
+  CLIENT: {
+    CREATE_ROOM: "CREATE_ROOM",
+  },
+};
 
 const userRooms = new Map();
 
@@ -58,6 +67,12 @@ io.on("connection", (socket) => {
       userRooms.delete(socket.id);
     }
     console.log("A user disconnected");
+  });
+
+  //RUM
+
+  socket.on(EVENTS.CLIENT.CREATE_ROOM, ({ roomName }) => {
+    console.log({ roomName });
   });
 });
 
