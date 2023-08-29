@@ -5,7 +5,7 @@ import HomePage from "./HomePage";
 import Lobby from "./Lobby";
 // import SocketApp from "./socketProvider";
 import Rooms from "./rooms";
-import { useSockets } from "../context/socketContext";
+import { useSocket } from "../context/socketContext";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ function App() {
 
 
 
-  const { socket } = useSockets();
+  const { room } = useSocket();
 
   const initializeChat = () => {
     sockets.connect();

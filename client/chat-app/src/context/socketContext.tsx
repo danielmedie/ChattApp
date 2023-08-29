@@ -1,39 +1,40 @@
-import { useContext, useState } from "react";
-import { createContext } from "react";
+import { useContext, useState, createContext, PropsWithChildren, useEffect } from "react";
 import { io } from "socket.io-client";
-import { IContext } from "../models/IContext";
 
 const SOCKET_URL = "http://localhost:3000";
 
 const socket = io(SOCKET_URL);
 
-const SocketContext = createContext<IContext>({
-    socket,
-    rooms: {},
-});
-
-
-
-function SocketsProvider(props: any) {
-
-    //username ska ligga här med
-    const [roomId, setRoomId] = useState("");
-    const [rooms, setRooms] = useState([]);
-
-    //Måste vara en självstängande tagg:
-    return <SocketContext.Provider value={{
-        socket,
-        //username, setUsername,
-        rooms, roomId
-    }}
-        {...props}
-    />;
+interface ISocketContext {
+    room: string
 }
 
-export const useSockets = () => useContext(SocketContext);
+const defaultValue = {
+    room: "",
 
-export default SocketsProvider;
+}
+
+const SocketContext = createContext<ISocketContext>(defaultValue);
 
 
-//För att kunna använda utan props- (annan fil)
-//const {sockets, roomId} = useSockets();
+export const useSocket = () => useContext(SocketContext);
+
+function SocketProvider({ children }: PropsWithChildren) {
+
+    // username, logged in osv ovanför rums-statet
+    const [room, setRoom] = useState("");
+
+    useEffect(() => {
+
+        socket.emit("join_room", room);
+    }, [room])
+
+
+    //Måste vara en självstängande tagg:
+    return <SocketContext.Provider value={{ room }}>;
+        {children}
+    </SocketContext.Provider>
+
+}
+
+export default SocketProvider;
