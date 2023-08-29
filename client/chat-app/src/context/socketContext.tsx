@@ -10,7 +10,7 @@ interface ISocketContext {
 }
 
 const defaultValue = {
-    room: "",
+    room: ""
 
 }
 
@@ -19,9 +19,8 @@ const SocketContext = createContext<ISocketContext>(defaultValue);
 
 export const useSocket = () => useContext(SocketContext);
 
-function SocketProvider({ children }: PropsWithChildren) {
+const SocketProvider = ({ children }: PropsWithChildren) => {
 
-    // username, logged in osv ovanför rums-statet
     const [room, setRoom] = useState("");
 
     useEffect(() => {
@@ -30,10 +29,14 @@ function SocketProvider({ children }: PropsWithChildren) {
     }, [room])
 
 
-    //Måste vara en självstängande tagg:
-    return <SocketContext.Provider value={{ room }}>;
-        {children}
-    </SocketContext.Provider>
+
+    // setRoom i login-feature
+
+    return (
+        <SocketContext.Provider value={{ room }}>
+            {children}
+        </SocketContext.Provider>
+    )
 
 }
 

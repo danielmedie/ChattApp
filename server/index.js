@@ -16,13 +16,6 @@ const io = new Server(server, {
 
 app.use(cors());
 
-const EVENTS = {
-  connection: "connection",
-  CLIENT: {
-    CREATE_ROOM: "CREATE_ROOM",
-  },
-};
-
 const userRooms = new Map();
 
 io.on("connection", (socket) => {
@@ -30,8 +23,9 @@ io.on("connection", (socket) => {
 
   const roomId = uuidv4();
 
-  socket.on("enter_room", (room) => {
+  socket.on("join_room", (room) => {
     socket.join(room);
+    console.log("Användare går till rum ", room);
     userRooms.set(socket.id, room);
     console.log(io.sockets.adapter.rooms);
   });
@@ -70,10 +64,6 @@ io.on("connection", (socket) => {
   });
 
   //RUM
-
-  socket.on(EVENTS.CLIENT.CREATE_ROOM, ({ roomName }) => {
-    console.log({ roomName });
-  });
 });
 
 const PORT = process.env.PORT || 3000;
