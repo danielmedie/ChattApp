@@ -3,6 +3,7 @@ const EVENTS = {
     CLIENT: {
       CREATE_ROOM: "CREATE_ROOM",
     },
+    
   };
 
   export default EVENTS;
